@@ -9,6 +9,15 @@ const generateToken = (id) => {
   });
 };
 
+const test = async (req, res) => {
+  try {
+    const result = await User.find();
+    res.status(201).json({ result });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
 // Register user
 const register = async (req, res) => {
   try {
@@ -111,4 +120,5 @@ module.exports = {
   register,
   login,
   logout,
+  test,
 };
