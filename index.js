@@ -17,23 +17,7 @@ connectDB();
 const app = express();
 
 // CORS middleware
-// app.use(cors());
-
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Specify the frontend origin
-    credentials: true, // Allow cookies or tokens
-  })
-);
-
-// Handle preflight requests
-app.options(
-  "*",
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // Body parser
 app.use(express.json());
