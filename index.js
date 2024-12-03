@@ -17,14 +17,7 @@ connectDB();
 const app = express();
 
 // CORS middleware
-app.use(
-  cors({
-    origin: "*",
-    // credentials: true,
-    // methods: ["GET", "POST", "PUT", "DELETE"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 // Body parser
 app.use(express.json());
