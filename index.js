@@ -21,8 +21,17 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Specify the exact origin of the frontend
-    credentials: true, // Allow cookies or tokens in requests
+    origin: "http://localhost:5173", // Specify the frontend origin
+    credentials: true, // Allow cookies or tokens
+  })
+);
+
+// Handle preflight requests
+app.options(
+  "*",
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
   })
 );
 
