@@ -21,22 +21,24 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Specify the frontend origin
-    credentials: true, // Allow cookies or tokens
+    origin: "http://localhost:5173", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow these HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
+    credentials: true, // Allow credentials (cookies, tokens)
   })
 );
 
-// Handle preflight requests
-app.options(
-  "*",
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+// Handle preflight requests for all routes
+app.options("*", cors());
 
 // Body parser
 app.use(express.json());
+
+// Log all incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
